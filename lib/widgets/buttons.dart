@@ -1,6 +1,5 @@
-import 'package:epicerie_web/consts/constants.dart';
 import 'package:flutter/material.dart';
-
+import 'package:epicerie_web/consts/constants.dart';
 
 import '../responsive.dart';
 

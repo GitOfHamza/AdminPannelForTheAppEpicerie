@@ -1,7 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:epicerie_web/consts/constants.dart';
 import 'package:epicerie_web/services/utils.dart';
-import 'package:flutter/material.dart';
-
 
 import '../responsive.dart';
 
@@ -39,37 +38,36 @@ class Header extends StatelessWidget {
           ),
         if (Responsive.isDesktop(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
-        !showTexField
-            ? Container()
-            : Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Search",
-                    fillColor: Theme.of(context).cardColor,
-                    filled: true,
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    suffixIcon: InkWell(
-                      onTap: () {},
-                      child: Container(
-                        padding: const EdgeInsets.all(defaultPadding * 0.75),
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: defaultPadding / 2),
-                        decoration: const BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: const Icon(
-                          Icons.search,
-                          size: 25,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+        !showTexField ? Container() : Container()
+        // : Expanded(
+        // child: TextField(
+        //   decoration: InputDecoration(
+        //     hintText: "Search",
+        //     fillColor: Theme.of(context).cardColor,
+        //     filled: true,
+        //     border: const OutlineInputBorder(
+        //       borderSide: BorderSide.none,
+        //       borderRadius: BorderRadius.all(Radius.circular(10)),
+        //     ),
+        //     suffixIcon: InkWell(
+        //       onTap: () {},
+        //       child: Container(
+        //         padding: const EdgeInsets.all(defaultPadding * 0.75),
+        //         margin: const EdgeInsets.symmetric(
+        //             horizontal: defaultPadding / 2),
+        //         decoration: const BoxDecoration(
+        //           color: Colors.blue,
+        //           borderRadius: BorderRadius.all(Radius.circular(10)),
+        //         ),
+        //         child: const Icon(
+        //           Icons.search,
+        //           size: 25,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        // ),
       ],
     );
   }

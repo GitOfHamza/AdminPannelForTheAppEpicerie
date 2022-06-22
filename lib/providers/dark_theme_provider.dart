@@ -1,7 +1,6 @@
 
-import 'package:epicerie_web/services/dark_them_preferences.dart';
 import 'package:flutter/material.dart';
-
+import 'package:epicerie_web/services/dark_them_preferences.dart';
 
 class DarkThemeProvider with ChangeNotifier {
   DarkThemePreference darkThemePreference = DarkThemePreference();

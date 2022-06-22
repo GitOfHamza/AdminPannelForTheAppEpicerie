@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:epicerie_web/controllers/MenuController.dart';
 import 'package:epicerie_web/widgets/side_menu.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../responsive.dart';

@@ -100,5 +100,27 @@
       loadMainDartJs();
     }
   </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+  
+
+  <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyAz72rvxafhid4siwmg_WvMRMf8C3u34cY",
+        authDomain: "epicerie-appecom.firebaseapp.com",
+        projectId: "epicerie-appecom",
+        storageBucket: "epicerie-appecom.appspot.com",
+        messagingSenderId: "1048956315279",
+        appId: "1:1048956315279:web:44189f1577d178c7bbb2fa",
+        measurementId: "G-BM3C0NMVS4"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.getAnalytics(app);
+  </script>
 </body>
 </html>

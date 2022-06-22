@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:epicerie_web/consts/constants.dart';
 import 'package:epicerie_web/inner_screens/add_prod.dart';
 import 'package:epicerie_web/responsive.dart';
+import 'package:epicerie_web/services/global_method.dart';
 import 'package:epicerie_web/services/utils.dart';
 import 'package:epicerie_web/widgets/buttons.dart';
 import 'package:epicerie_web/widgets/header.dart';
+import 'package:epicerie_web/widgets/products_widget.dart';
 import 'package:epicerie_web/widgets/text_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/MenuController.dart';
@@ -46,11 +49,6 @@ class DashboardScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  ButtonsWidget(
-                      onPressed: () {},
-                      text: 'View All',
-                      icon: Icons.store,
-                      backgroundColor: Colors.blue),
                   const Spacer(),
                   ButtonsWidget(
                       onPressed: () {

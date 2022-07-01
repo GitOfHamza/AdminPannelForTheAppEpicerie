@@ -23,20 +23,24 @@ import '../responsive.dart';
 import 'package:firebase/firebase.dart' as fb;
 
 class EditProductScreen extends StatefulWidget {
-  const EditProductScreen({
-    Key? key,
-    required this.id,
-    required this.title,
-    required this.price,
-    required this.salePrice,
-    required this.productCat,
-    required this.imageUrl,
-    required this.isOnSale,
-  }) : super(key: key);
+  EditProductScreen(
+      {Key? key,
+      required this.id,
+      required this.title,
+      required this.price,
+      required this.salePrice,
+      required this.productCat,
+      required this.imageUrl,
+      required this.isOnSale,
+      this.isRemove = false,
+      this.isUpdate = false,
+      this.productInfo = false})
+      : super(key: key);
 
   final String id, title, price, productCat, imageUrl;
-  final bool isOnSale;
+  final bool isOnSale, isRemove, isUpdate;
   final String salePrice;
+  bool productInfo;
   @override
   _EditProductScreenState createState() => _EditProductScreenState();
 }
@@ -62,6 +66,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   bool _isLoading = false;
   @override
   void initState() {
+    widget.productInfo =
+        widget.isRemove == false && widget.isUpdate == false ? true : false;
     // set the price and title initial values and initialize the controllers
     _priceController = TextEditingController(text: widget.price);
     _titleController = TextEditingController(text: widget.title);
@@ -180,7 +186,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   fct: () {
                     context.read<MenuController>().controlEditProductsMenu();
                   },
-                  title: 'Edit this product',
+                  title: widget.productInfo == true
+                      ? 'Product Info'
+                      : (widget.isUpdate
+                          ? 'Edit this product'
+                          : 'Remove this product'),
                 ),
                 Container(
                   width: size.width > 650 ? 650 : size.width,
@@ -401,39 +411,45 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              ButtonsWidget(
-                                onPressed: () async {
-                                  GlobalMethods.warningDialog(
-                                      title: 'Delete?',
-                                      subtitle: 'Press okay to confirm',
-                                      fct: () async {
-                                        await FirebaseFirestore.instance
-                                            .collection('produits')
-                                            .doc(widget.id)
-                                            .delete();
-                                        await Fluttertoast.showToast(
-                                          msg: "Product has been deleted",
-                                          toastLength: Toast.LENGTH_LONG,
-                                          gravity: ToastGravity.CENTER,
-                                          timeInSecForIosWeb: 1,
-                                        );
-                                        while (Navigator.canPop(context)) {
-                                          Navigator.pop(context);
-                                        }
-                                      },
-                                      context: context);
-                                },
-                                text: 'Delete',
-                                icon: IconlyBold.danger,
-                                backgroundColor: Colors.red.shade700,
+                              Visibility(
+                                visible: widget.isRemove || widget.productInfo,
+                                child: ButtonsWidget(
+                                  onPressed: () async {
+                                    GlobalMethods.warningDialog(
+                                        title: 'Delete?',
+                                        subtitle: 'Press okay to confirm',
+                                        fct: () async {
+                                          await FirebaseFirestore.instance
+                                              .collection('produits')
+                                              .doc(widget.id)
+                                              .delete();
+                                          await Fluttertoast.showToast(
+                                            msg: "Product has been deleted",
+                                            toastLength: Toast.LENGTH_LONG,
+                                            gravity: ToastGravity.CENTER,
+                                            timeInSecForIosWeb: 1,
+                                          );
+                                          while (Navigator.canPop(context)) {
+                                            Navigator.pop(context);
+                                          }
+                                        },
+                                        context: context);
+                                  },
+                                  text: 'Delete',
+                                  icon: IconlyBold.danger,
+                                  backgroundColor: Colors.red.shade700,
+                                ),
                               ),
-                              ButtonsWidget(
-                                onPressed: () {
-                                  _updateProduct();
-                                },
-                                text: 'Update',
-                                icon: IconlyBold.setting,
-                                backgroundColor: Colors.blue,
+                              Visibility(
+                                visible: widget.isUpdate || widget.productInfo,
+                                child: ButtonsWidget(
+                                  onPressed: () {
+                                    _updateProduct();
+                                  },
+                                  text: 'Update',
+                                  icon: IconlyBold.setting,
+                                  backgroundColor: Colors.blue,
+                                ),
                               ),
                             ],
                           ),

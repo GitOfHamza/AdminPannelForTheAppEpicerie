@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:epicerie_web/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -104,6 +105,62 @@ class _ProductWidgetState extends State<ProductWidget> {
                         height: size.width * 0.12,
                       ),
                     ),
+                    const Spacer(),
+                    PopupMenuButton(
+                        itemBuilder: (context) => [
+                              PopupMenuItem(
+                                child: ButtonsWidget(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditProductScreen(
+                                            isUpdate: true,
+                                            id: widget.id,
+                                            title: title,
+                                            price: price,
+                                            salePrice: salePrice,
+                                            productCat: productCat,
+                                            imageUrl: imageUrl == null
+                                                ? 'https://cdn-icons-png.flaticon.com/512/1182/1182781.png'
+                                                : imageUrl!,
+                                            isOnSale: isOnSale,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    text: 'Edit',
+                                    icon: Icons.update,
+                                    backgroundColor: Colors.green.shade300),
+                                value: 1,
+                              ),
+                              PopupMenuItem(
+                                child: ButtonsWidget(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditProductScreen(
+                                            isRemove: true,
+                                            id: widget.id,
+                                            title: title,
+                                            price: price,
+                                            salePrice: salePrice,
+                                            productCat: productCat,
+                                            imageUrl: imageUrl == null
+                                                ? 'https://cdn-icons-png.flaticon.com/512/1182/1182781.png'
+                                                : imageUrl!,
+                                            isOnSale: isOnSale,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    text: 'Delete',
+                                    icon: Icons.remove,
+                                    backgroundColor: Colors.red),
+                                value: 2,
+                              ),
+                            ])
                   ],
                 ),
                 const SizedBox(
